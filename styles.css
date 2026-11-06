@@ -79,10 +79,10 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
 h1{
   font-family:var(--serif);font-weight:300;
   font-size:clamp(42px,7.2vw,94px);line-height:1.03;letter-spacing:-.02em;
-  margin:0 0 28px;max-width:15ch;
+  margin:0 0 28px;max-width:15ch;text-wrap:balance;
 }
 h1 em{font-style:italic;color:var(--accent)}
-.lede{max-width:52ch;color:var(--muted);font-size:clamp(15px,1.5vw,17px);margin:0 0 44px}
+.lede{max-width:52ch;color:var(--muted);font-size:clamp(15px,1.5vw,17px);margin:0 0 44px;text-wrap:pretty}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:56px}
 .btn{
   display:inline-flex;align-items:center;gap:10px;
