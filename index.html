@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>回声 ECHOES · 一档说话的节目</title>
+<meta name="description" content="回声 ECHOES，一档在深夜录的播客。每周三更新。聊人、聊手艺、聊那些白天没空说的事。" />
+<meta name="theme-color" content="#0a0a0c" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="回声 ECHOES · 一档说话的节目" />
+<meta property="og:description" content="每周三更新。聊人、聊手艺、聊那些白天没空说的事。" />
+<meta property="og:image" content="assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230a0a0c'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23e0b062'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="wrap">
+  <nav class="nav">
+    <a class="brand" href="#top"><span class="dot"></span><span id="brandName">回声 ECHOES</span></a>
+    <div class="nav-links">
+      <a href="#episodes">全部节目</a>
+      <a href="#about">关于</a>
+      <a href="#subscribe">订阅</a>
+    </div>
+    <a class="nav-cta" href="#subscribe">收听</a>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- 首屏 -->
+  <section class="wrap hero">
+    <div class="hero-glow"></div>
+    <p class="eyebrow">每周三 · 深夜更新</p>
+    <h1 id="heroTitle">把<em>说不出口</em>的话，录下来。</h1>
+    <p class="lede" id="heroLede"></p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" id="heroPlay">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        从最新一期开始听
+      </button>
+      <a class="btn btn-ghost" href="#episodes">全部节目</a>
+    </div>
+    <div class="hero-meta">
+      <div><b id="statCount">12</b>期已上线</div>
+      <div><b id="statHours">—</b>总时长</div>
+      <div><b>每周三</b>更新节奏</div>
+    </div>
+  </section>
+
+  <!-- 最新一期 -->
+  <section class="wrap">
+    <div class="stage rv">
+      <div class="cover" id="stageCover"><span id="stageNum">12</span></div>
+      <div class="stage-body">
+        <span class="stage-tag">最新一期</span>
+        <h2 id="stageTitle">——</h2>
+        <p id="stageDesc"></p>
+        <div class="stage-row">
+          <button class="play-big" id="stagePlay" aria-label="播放最新一期">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <span class="stage-dur" id="stageMeta"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 节目列表 -->
+  <section class="wrap section" id="episodes">
+    <div class="section-head">
+      <h3>全部节目</h3>
+      <span class="cnt" id="epCount">EPISODES</span>
+    </div>
+    <div id="epList"></div>
+  </section>
+
+  <!-- 关于 -->
+  <section class="wrap section about" id="about">
+    <div class="rv">
+      <h3>关于这档节目</h3>
+      <p>
+        这里没有嘉宾头衔，也没有「本期干货满满」。我们只是把麦克风放在桌上，让两个人慢慢说话——
+        说那些平时会被打断、会被圆场、会被一句「算了」盖过去的部分。
+      </p>
+      <p>
+        每期 30 到 60 分钟，不插广告，不加背景音乐。你可以在通勤、洗碗、失眠的时候听。
+      </p>
+    </div>
+    <div class="rv">
+      <div class="facts">
+        <div class="fact"><span>主播</span><b>待填</b></div>
+        <div class="fact"><span>更新</span><b>每周三 21:00</b></div>
+        <div class="fact"><span>时长</span><b>30 – 60 分钟</b></div>
+        <div class="fact"><span>语言</span><b>中文</b></div>
+        <div class="fact"><span>联系</span><b>hello@your-domain.com</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 订阅 -->
+  <section class="wrap section" id="subscribe">
+    <div class="section-head"><h3>订阅收听</h3></div>
+    <p class="sub-note">更新会第一时间出现在你常用的播放器里。也可以直接把这个网站存进书签。</p>
+    <div class="subs">
+      <a class="chip" href="#" data-todo>Apple Podcasts</a>
+      <a class="chip" href="#" data-todo>小宇宙</a>
+      <a class="chip" href="#" data-todo>Spotify</a>
+      <a class="chip" href="#" data-todo>网易云音乐</a>
+      <a class="chip" href="#" data-todo>RSS 订阅</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>© <span id="year">2026</span> 回声 ECHOES</span>
+  <span>Made with silence</span>
+</footer>
+
+<!-- 底部播放器 -->
+<div class="player" id="player">
+  <div class="p-left">
+    <div class="cover small" id="pCover"><span id="pNum">12</span></div>
+    <div class="p-meta">
+      <p class="p-title" id="pTitle">选一期开始听</p>
+      <p class="p-sub" id="pSub">ECHOES</p>
+    </div>
+  </div>
+  <div class="p-center">
+    <button class="ctrl" id="prev" aria-label="上一期">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg>
+    </button>
+    <button class="p-play" id="playPause" aria-label="播放或暂停">
+      <svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <button class="ctrl" id="next" aria-label="下一期">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg>
+    </button>
+    <div class="track">
+      <span class="time" id="tCur">00:00</span>
+      <input type="range" id="seek" min="0" max="1000" value="0" aria-label="播放进度">
+      <span class="time" id="tDur">00:00</span>
+    </div>
+  </div>
+  <div class="p-right">
+    <button class="speed" id="speed">1×</button>
+    <input type="range" class="vol" id="vol" min="0" max="100" value="100" aria-label="音量">
+  </div>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script src="app.js"></script>
+</body>
+</html>
