@@ -1,59 +1,8 @@
 /* =========================================================
-   1. 站点信息 —— 改这里就能换名字、标语
+   你要改的内容，全在 content.js 里。
+   这个文件是播放器和页面逻辑，一般不用动。
    ========================================================= */
-const SITE = {
-  brand: "回声 ECHOES",
-  title: '把<em>说不出口</em>的话，录下来。',
-  lede: '一档在深夜录的播客。没有脚本，也不太剪辑——聊人，聊手艺，聊那些白天大家都装作没空说的事。戴上耳机，慢一点。',
-};
 
-/* =========================================================
-   2. 节目单 —— 新版放最上面
-   audio: 音频地址。相对路径写 "assets/audio/ep12.mp3"，
-          也可以直接填外链。留空则显示「音频待上传」。
-   ========================================================= */
-const EPISODES = [
-  {
-    n: 12,
-    title: "我们为什么害怕安静",
-    date: "2026-11-05",
-    duration: "48:12",
-    desc: "把手机放在另一个房间的第一晚，我在沙发上坐了四十分钟。这期聊习惯性的人群依赖，以及重新学会一个人待着。",
-    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-  },
-  {
-    n: 11,
-    title: "手艺人不会消失，只是变贵了",
-    date: "2026-10-29",
-    duration: "52:40",
-    desc: "见了一位做了三十年木工的师傅。他说现在年轻人不是不想学，是等不起。",
-    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-  },
-  { n: 10, title: "凌晨三点的便利店", date: "2026-10-22", duration: "39:05",
-    desc: "一个夜班店员、一个刚下飞机的旅客，和一份关东煮。城市最诚实的地方往往在深夜。", audio: "" },
-  { n: 9, title: "被夸「情绪稳定」是什么感觉", date: "2026-10-15", duration: "44:18",
-    desc: "稳定有时候是能力，有时候只是不想麻烦别人。这期我们不太客气地聊了聊这件事。", audio: "" },
-  { n: 8, title: "关于辞职，我准备了两年", date: "2026-10-08", duration: "56:33",
-    desc: "不是冲动，也不是勇敢。把所有退路算完之后，还是决定走。", audio: "" },
-  { n: 7, title: "我妈开始用表情包了", date: "2026-10-01", duration: "41:27",
-    desc: "代沟在消失，还是我们只是学会了互相敷衍？这期聊和父母重新相处的笨拙。", audio: "" },
-  { n: 6, title: "旅行不是逃跑", date: "2026-09-24", duration: "37:52",
-    desc: "一个人去了趟西北，八天没发朋友圈。回来后想清楚了几件事。", audio: "" },
-  { n: 5, title: "那些没被听懂的玩笑", date: "2026-09-17", duration: "45:10",
-    desc: "幽默是防御机制，也是试探。我们复盘了几次尴尬的沉默。", audio: "" },
-  { n: 4, title: "深夜厨房", date: "2026-09-10", duration: "33:44",
-    desc: "一个人做饭给自己吃，是件很郑重的事。", audio: "" },
-  { n: 3, title: "朋友是阶段性的吗", date: "2026-09-03", duration: "49:02",
-    desc: "有些人不联系了，但没有矛盾。这期聊聊成年人的散场。", audio: "" },
-  { n: 2, title: "怎么和失眠讲和", date: "2026-08-27", duration: "42:56",
-    desc: "不数羊，不看表。把睡不着当成一天里多出来的一段时间。", audio: "" },
-  { n: 1, title: "第一期：先随便聊聊", date: "2026-08-20", duration: "28:15",
-    desc: "为什么要做这档节目，以及我们想在这里留下什么。", audio: "" },
-];
-
-/* =========================================================
-   3. 下面一般不用动
-   ========================================================= */
 const $ = (s) => document.querySelector(s);
 const audio = $("#audio");
 const list = $("#epList");
@@ -72,8 +21,8 @@ document.title = SITE.brand + " · 一档说话的节目";
 $("#statCount").textContent = EPISODES.length;
 $("#epCount").textContent = EPISODES.length + " EPISODES";
 const totalMin = EPISODES.reduce((a, e) => {
-  const [m, s] = e.duration.split(":").map(Number);
-  return a + m + s / 60;
+  const [m, s] = String(e.duration).split(":").map(Number);
+  return a + (m || 0) + (s || 0) / 60;
 }, 0);
 $("#statHours").textContent = Math.floor(totalMin / 60) + " 小时 " + Math.round(totalMin % 60) + " 分";
 
@@ -97,6 +46,10 @@ EPISODES.forEach((ep, i) => {
   row.className = "ep";
   row.dataset.i = i;
   row.style.setProperty("--h", hueOf(i));
+  const sub = [ep.date, ep.duration, ep.audio ? "可直接收听" : "音频待上传"]
+    .filter(Boolean)
+    .map((t) => `<span>${t}</span>`)
+    .join('<i>·</i>');
   row.innerHTML = `
     <span class="ep-idx">${pad(ep.n)}</span>
     <div class="ep-main">
@@ -104,7 +57,7 @@ EPISODES.forEach((ep, i) => {
         <span>${ep.title}</span>
         <span class="bars"><i></i><i></i><i></i><i></i></span>
       </p>
-      <div class="ep-sub"><span>${ep.date}</span><i>·</i><span>${ep.duration}</span><i>·</i><span>${ep.audio ? "可直接收听" : "音频待上传"}</span></div>
+      <div class="ep-sub">${sub}</div>
     </div>
     <button class="ep-btn" aria-label="播放 ${ep.title}">${PLAY_ICON}</button>
   `;
@@ -137,7 +90,7 @@ function setTrack(i, autoplay) {
   audio.src = ep.audio;
   audio.load();
   if (autoplay) play();
-  if ("mediaSession" in navigator) {
+  if ("mediaSession" in navigator && window.MediaMetadata) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: ep.title, artist: SITE.brand, album: "EP." + pad(ep.n),
     });
@@ -145,16 +98,12 @@ function setTrack(i, autoplay) {
 }
 
 function play() {
-  if (cur < 0) { setTrack(0, true); return; }
+  if (cur < 0) { playing = true; setTrack(0, true); return; }
   if (!EPISODES[cur].audio) {
-    // 没上传音频：安静地提示一下，不弹窗
     $("#pSub").textContent = "这一期的音频还没放上来";
     return;
   }
-  audio.play().then(() => {
-    playing = true;
-    paint();
-  }).catch(() => { playing = false; paint(); });
+  audio.play().then(() => { playing = true; paint(); }).catch(() => { playing = false; paint(); });
 }
 function pause() { audio.pause(); playing = false; paint(); }
 
@@ -166,14 +115,15 @@ function toggleIndex(i) {
 }
 
 function paint() {
-  $("#ppIcon").outerHTML = playing
-    ? '<svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>'
-    : '<svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  const icon = $("#ppIcon");
+  if (icon) {
+    icon.outerHTML = playing
+      ? '<svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>'
+      : '<svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  }
   rows.forEach((r, k) => {
     r.classList.toggle("is-playing", k === cur && playing);
-    const btn = r.querySelector(".ep-btn");
-    if (k === cur && playing) btn.innerHTML = PAUSE_ICON;
-    else btn.innerHTML = PLAY_ICON;
+    r.querySelector(".ep-btn").innerHTML = (k === cur && playing) ? PAUSE_ICON : PLAY_ICON;
   });
 }
 
@@ -199,18 +149,13 @@ audio.addEventListener("timeupdate", () => {
   $("#tCur").textContent = fmt(audio.currentTime);
   $("#tDur").textContent = fmt(audio.duration);
 });
-audio.addEventListener("loadedmetadata", () => {
-  $("#tDur").textContent = fmt(audio.duration);
-});
-audio.addEventListener("error", () => {
-  $("#pSub").textContent = "音频加载失败，检查一下地址";
-});
+audio.addEventListener("loadedmetadata", () => { $("#tDur").textContent = fmt(audio.duration); });
+audio.addEventListener("error", () => { $("#pSub").textContent = "音频加载失败，检查一下地址"; });
 
 function setProgress(ratio) {
   const seek = $("#seek");
-  const v = Math.round(ratio * 1000);
-  seek.value = v;
-  seek.style.setProperty("--p", (ratio * 100) + "%");
+  seek.value = Math.round(ratio * 1000);
+  seek.style.setProperty("--p", ratio * 100 + "%");
 }
 $("#seek").addEventListener("input", (e) => {
   const ratio = e.target.value / 1000;
@@ -241,9 +186,7 @@ document.addEventListener("keydown", (e) => {
 
 function fmt(t) {
   if (!isFinite(t)) return "00:00";
-  const m = Math.floor(t / 60);
-  const s = Math.floor(t % 60);
-  return pad(m) + ":" + pad(s);
+  return pad(Math.floor(t / 60)) + ":" + pad(Math.floor(t % 60));
 }
 
 /* ---- 入场动画 ---- */
@@ -252,7 +195,7 @@ const io = new IntersectionObserver((es) => {
 }, { threshold: 0.12 });
 document.querySelectorAll(".rv").forEach((el) => io.observe(el));
 
-/* ---- 占位链接：点了给个提示，不跳走 ---- */
+/* ---- 占位订阅链接：点了给个提示，不跳走 ---- */
 document.querySelectorAll("[data-todo]").forEach((a) => {
   const original = a.textContent;
   a.addEventListener("click", (ev) => {
