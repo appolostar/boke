@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>文章 · 回声 ECHOES</title>
+<meta name="description" content="回声 ECHOES 的文字：关于做东西、关于说话。" />
+<meta name="theme-color" content="#0a0a0c" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .posts{padding-top:clamp(40px,7vh,70px)}
+  .posts h1{font-size:clamp(34px,5vw,56px);margin-bottom:16px}
+  .posts .sub{color:var(--muted);margin:0 0 54px;font-size:15px}
+  .post-card{
+    display:block;padding:30px 8px;border-top:1px solid var(--line);
+    transition:padding-left .4s var(--ease),background .4s var(--ease);border-radius:10px;
+  }
+  .post-card:last-of-type{border-bottom:1px solid var(--line)}
+  .post-card:hover{padding-left:18px;background:linear-gradient(90deg,rgba(255,255,255,.035),transparent 70%)}
+  .post-card time{font-size:12px;letter-spacing:.18em;color:var(--muted-2);text-transform:uppercase}
+  .post-card h2{font-family:var(--serif);font-weight:300;font-size:clamp(21px,2.6vw,30px);margin:10px 0 8px;letter-spacing:-.01em}
+  .post-card p{color:var(--muted);margin:0;font-size:14.5px}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="wrap">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="dot"></span><span>回声 ECHOES</span></a>
+    <div class="nav-links">
+      <a href="index.html#episodes">全部节目</a>
+      <a href="articles.html" style="color:var(--text)">文章</a>
+      <a href="index.html#about">关于</a>
+    </div>
+    <a class="nav-cta" href="index.html#subscribe">收听</a>
+  </nav>
+</header>
+
+<main class="wrap posts">
+  <p class="eyebrow">文字</p>
+  <h1>文章</h1>
+  <p class="sub">节目之外，偶尔写点东西。关于做东西，关于说话。</p>
+
+  <a class="post-card" href="article-2026-11-06.html">
+    <time>2026-11-06</time>
+    <h2>我给自己搭了个播客站</h2>
+    <p>三个文件、一行 git push，和一个被墙的下午。</p>
+  </a>
+</main>
+
+<footer class="wrap">
+  <span>© <span id="year">2026</span> 回声 ECHOES</span>
+  <span>Made with silence</span>
+</footer>
+
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

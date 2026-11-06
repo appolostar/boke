@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>我给自己搭了个播客站 · 回声 ECHOES</title>
+<meta name="description" content="三个文件、一行 git push，和一个被墙的下午。" />
+<meta name="theme-color" content="#0a0a0c" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .article{max-width:720px;margin-inline:auto;padding-top:clamp(40px,7vh,80px)}
+  .article .back{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);display:inline-block;margin-bottom:36px;transition:color .3s}
+  .article .back:hover{color:var(--accent)}
+  .article h1{font-size:clamp(32px,5vw,54px);max-width:none;margin-bottom:22px}
+  .article .meta{font-size:12.5px;letter-spacing:.14em;color:var(--muted-2);text-transform:uppercase;padding-bottom:34px;border-bottom:1px solid var(--line);margin-bottom:48px}
+  .article p{color:#cfcac1;font-size:17px;line-height:1.95;margin:0 0 26px}
+  .article h2{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.6vw,30px);margin:56px 0 20px;letter-spacing:-.01em}
+  .article blockquote{margin:36px 0;padding:4px 0 4px 22px;border-left:1px solid var(--accent);color:var(--muted);font-style:italic}
+  .article code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:rgba(255,255,255,.07);padding:2px 6px;border-radius:4px}
+  .article pre{background:#101013;border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow:auto;margin:0 0 26px}
+  .article pre code{background:none;padding:0;font-size:13px;line-height:1.8}
+  .article hr{border:0;border-top:1px solid var(--line);margin:56px 0}
+  .foot-note{color:var(--muted-2);font-size:14px}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="wrap">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="dot"></span><span>回声 ECHOES</span></a>
+    <div class="nav-links">
+      <a href="index.html#episodes">全部节目</a>
+      <a href="articles.html" style="color:var(--text)">文章</a>
+      <a href="index.html#about">关于</a>
+    </div>
+    <a class="nav-cta" href="index.html#subscribe">收听</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <article class="article">
+    <a class="back" href="articles.html">← 全部文章</a>
+    <h1>我给自己搭了个播客站</h1>
+    <p class="meta">2026-11-06 · 随笔</p>
+
+    <p>一直想有个自己的地方。不是社交平台上的主页，是那种打开来只属于一个人的页面——没有推荐，没有广告，也没有"你可能还喜欢"。</p>
+
+    <p>于是今天下午，我给自己搭了个播客站。</p>
+
+    <h2>不要框架</h2>
+
+    <p>最省事的路是拿个模板，套上内容，半小时上线。但我试过几次，最后都卡在同一件事上：想改一个地方的间距，要在三个配置文件里翻半天。</p>
+
+    <p>所以这次用了最笨的办法——手写。三个文件：一个 HTML 管结构，一个 CSS 管样子，一个 JS 管播放器。没有 npm，没有构建，没有 <code>node_modules</code>。</p>
+
+    <p>好处是十年后它还能打开。坏处是每一个像素都得自己想清楚。</p>
+
+    <h2>播放器是重点</h2>
+
+    <p>播客站和普通网站的区别就在那个播放器。用户会开着它去洗碗、去通勤、去睡着。所以它必须一直在，不能在滚动的时候消失，不能点一下跳走。</p>
+
+    <p>进度条、倍速、音量、空格键暂停，全是浏览器原生的 <code>&lt;audio&gt;</code> 接出来的。耳机上的实体按键也能用——这个靠 <code>MediaSession</code> 接口，接上之后锁屏界面会显示正在播的那一期的名字。</p>
+
+    <p>这些小地方，用户不会夸你，但没了就会觉得"哪里怪怪的"。</p>
+
+    <h2>内容和代码要分开</h2>
+
+    <p>写完之后我改了一版：把所有内容抽到一个单独的文件里。</p>
+
+    <p>因为我以后要做的不是改代码，是加节目。既然是加节目，就不该让我在一堆函数里找一个字符串。现在要更新一期，只需要打开一个文件，复制一段，改五个字段。</p>
+
+    <blockquote>工具应该迁就人，而不是反过来。</blockquote>
+
+    <h2>然后是被墙</h2>
+
+    <p>代码写完，推上去，五分钟。</p>
+
+    <p>实际上花了四十分钟，其中三十分钟在和网络较劲——<code>github.com</code> 打不开，一直"连接被重置"。有意思的是 <code>api.github.com</code> 反而通，SSH 也通。也就是说：推代码没问题，只有那个让我点"Create"的网页不行。</p>
+
+    <p>最后是网页自己通了一下，我趁那个窗口把仓库建好、把 Pages 打开、把代码推上去。整个过程像在等人打喷嚏。</p>
+
+    <h2>现在它在</h2>
+
+    <p>页面能打开了。上面有十二期占位的节目，播放器能响，列表能点。每一期都是假的，但结构是真的。</p>
+
+    <p>接下来要做的才是难的部分：录真的东西，说真的话。</p>
+
+    <p class="foot-note">— 站点在 <a href="https://appolostar.github.io/boke/" style="color:var(--accent)">appolostar.github.io/boke</a>，代码也在那儿。</p>
+  </article>
+</main>
+
+<footer class="wrap">
+  <span>© <span id="year">2026</span> 回声 ECHOES</span>
+  <span>Made with silence</span>
+</footer>
+
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
